@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -5,12 +6,15 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject klocek;
+    public GameObject OBSTACLES;
+
     public SpriteRenderer[] warningTOP;
     public SpriteRenderer[] warningLEFT;
     public SpriteRenderer[] warningRIGHT;
-    private Color inv = new Color(0, 0, 0, 0);
-    private Color white = new Color(1, 1, 1 , 1);
+    [SerializeField] public Color inv = new Color(0, 0, 0, 0);
     public float cooldown;
+
+    public Points p;
 
 
     private void Start()
@@ -36,7 +40,7 @@ public class Spawner : MonoBehaviour
     {
         yield return StartCoroutine(AnimateWarning(t, 0.4f, warning));
         
-        GameObject kloc = Instantiate(klocek, warning[t].gameObject.transform.position, Quaternion.identity);
+        GameObject kloc = Instantiate(klocek, warning[t].gameObject.transform.position, Quaternion.identity, OBSTACLES.transform);
         kloc.GetComponent<KlocekMovement>().dir = pos;
         Vector3 size = kloc.transform.localScale;
         kloc.transform.localScale = Vector3.zero;
@@ -45,38 +49,47 @@ public class Spawner : MonoBehaviour
 
     IEnumerator AnimateWarning(int t, float cooldown, SpriteRenderer[] warning)
     {
-        warning[t].color = white;
+        warning[t].color = p.ObjectsColor[p.idx];
         LeanTween.scale(warning[t].gameObject, new Vector3(0.4f, 0.5f, 1f), 0.1f);
         yield return new WaitForSeconds(0.1f);
         LeanTween.scale(warning[t].gameObject, new Vector3(0.3f, 0.4f, 1f), 0.1f);
         yield return new WaitForSeconds(0.1f + cooldown);
         warning[t].color = inv;
-
     }
-    IEnumerator SpawnObject()
+    public IEnumerator SpawnObject()
     {
-        while (true)
+        while (p.CountThePoints)
         {
             yield return new WaitForSeconds(cooldown);
-            int pos = Random.Range(0, 3);
-            int t = 0;
-
-            if (pos == 0)
+            if(p.CountThePoints == false)
             {
-                t = Random.Range(0, warningTOP.Length);
-                StartCoroutine(Spwn(t, warningTOP, pos));
+                foreach (Transform child in OBSTACLES.transform)
+                {
+                    Destroy(child.gameObject);
+                }
             }
-
-            if (pos == 1)
+            else
             {
-                t = Random.Range(0, warningLEFT.Length);
-                StartCoroutine(Spwn(t, warningLEFT, pos));
-            }
+                int pos = UnityEngine.Random.Range(0, 3);
+                int t;
 
-            if (pos == 2)
-            {
-                t = Random.Range(0, warningRIGHT.Length);
-                StartCoroutine(Spwn(t, warningRIGHT, pos));
+                if (pos == 0)
+                {
+                    t = UnityEngine.Random.Range(0, warningTOP.Length);
+                    StartCoroutine(Spwn(t, warningTOP, pos));
+                }
+
+                if (pos == 1)
+                {
+                    t = UnityEngine.Random.Range(0, warningLEFT.Length);
+                    StartCoroutine(Spwn(t, warningLEFT, pos));
+                }
+
+                if (pos == 2)
+                {
+                    t = UnityEngine.Random.Range(0, warningRIGHT.Length);
+                    StartCoroutine(Spwn(t, warningRIGHT, pos));
+                }
             }
         }    
     }

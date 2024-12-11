@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 38037851}
   - component: {fileID: 38037853}
   m_Layer: 6
-  m_Name: Square (2)
+  m_Name: RIGHT_border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 92193914}
   - component: {fileID: 92193916}
   m_Layer: 6
-  m_Name: Square (1)
+  m_Name: TOP_border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -845,7 +845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 123870608}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BORDERS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -882,7 +882,7 @@ GameObject:
   - component: {fileID: 144687045}
   - component: {fileID: 144687044}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: POINTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2565,6 +2565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   klocek: {fileID: 5048417815094888420, guid: f864a6e2501c8924dbffa8dc4fd36063, type: 3}
+  OBSTACLES: {fileID: 1677917788}
   warningTOP:
   - {fileID: 926280447}
   - {fileID: 1006220503}
@@ -2592,6 +2593,7 @@ MonoBehaviour:
   - {fileID: 254047408}
   - {fileID: 102835636}
   cooldown: 0.7
+  p: {fileID: 939908030}
 --- !u!4 &939908029
 Transform:
   m_ObjectHideFlags: 0
@@ -2619,9 +2621,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b226f0d3482e2d24d96c03d80454a9db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Borders:
+  - {fileID: 92193914}
+  - {fileID: 38037851}
+  - {fileID: 2135131386}
+  - {fileID: 2064876498}
+  player: {fileID: 1404804277}
+  ALL_OBSTACLES: {fileID: 1677917788}
+  BACKGROUND: {fileID: 1943825932}
+  POINTS: {fileID: 144687044}
+  WARNINIG: {fileID: 0}
+  pm: {fileID: 1404804279}
+  ObjectsColor:
+  - {r: 0.7735849, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.7531516, b: 0, a: 1}
+  - {r: 1, g: 0.52030706, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  BackgroundColor:
+  - {r: 0, g: 0.6320754, b: 0.61956793, a: 1}
+  - {r: 0, g: 0.46226418, b: 0.007835769, a: 1}
+  - {r: 0.5849056, g: 0, b: 0.45388874, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
   pointsTXT: {fileID: 144687044}
   points: 0
+  idx: 0
   spawner: {fileID: 939908028}
+  CountThePoints: 1
 --- !u!1 &1006220500
 GameObject:
   m_ObjectHideFlags: 0
@@ -3065,7 +3090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1368394546}
   m_Layer: 0
-  m_Name: spawner
+  m_Name: SPAWNER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3457,6 +3482,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1677917788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1677917789}
+  m_Layer: 0
+  m_Name: ALL OBSTACLES
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1677917789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677917788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7127352, y: 0.013673298, z: -0.046475798}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1783305653
 GameObject:
   m_ObjectHideFlags: 0
@@ -3873,7 +3929,7 @@ GameObject:
   - component: {fileID: 1943825933}
   - component: {fileID: 1943825932}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BACKGROUND
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4285,7 +4341,7 @@ GameObject:
   - component: {fileID: 2064876498}
   - component: {fileID: 2064876500}
   m_Layer: 6
-  m_Name: Square (3)
+  m_Name: LEFT_border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4519,7 +4575,7 @@ GameObject:
   - component: {fileID: 2135131386}
   - component: {fileID: 2135131388}
   m_Layer: 6
-  m_Name: Square
+  m_Name: BOTTOM_border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4653,3 +4709,4 @@ SceneRoots:
   - {fileID: 123870608}
   - {fileID: 1368394546}
   - {fileID: 793422693}
+  - {fileID: 1677917789}
